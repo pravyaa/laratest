@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\PartnerPreference;
 
 class User extends Authenticatable
 {
@@ -27,6 +28,14 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'last_name',
+        'gender',
+        'annual_income',
+        'job_type',
+        'family_type',
+        'date_of_birth',
+        'maritial_status',
+        'profile_image'
     ];
 
     /**
@@ -58,4 +67,8 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+     public function partner(){
+      return $this->hasOne(PartnerPreference::class , 'user_id' ,'id');
+    }
 }
